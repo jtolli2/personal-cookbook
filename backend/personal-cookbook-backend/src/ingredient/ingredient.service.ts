@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateIngredientDto } from './dto/create-ingredient.dto';
 import { UpdateIngredientDto } from './dto/update-ingredient.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Ingredient } from './entities/ingredient.entity';
+import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class IngredientService {
-  create(createIngredientDto: CreateIngredientDto) {
-    return 'This action adds a new ingredient';
-  }
+    constructor(
+        @InjectRepository(Ingredient)
+        private repository: Repository<Ingredient>,
+    ) {}
 
-  findAll() {
-    return `This action returns all ingredient`;
-  }
+    async create(
+        createIngredientDto: CreateIngredientDto,
+    ): Promise<InsertResult> {
+        const ingredient = this.repository.create(createIngredientDto);
 
-  findOne(id: number) {
-    return `This action returns a #${id} ingredient`;
-  }
+        return this.repository.insert(ingredient);
+    }
 
-  update(id: number, updateIngredientDto: UpdateIngredientDto) {
-    return `This action updates a #${id} ingredient`;
-  }
+    async findAll(): Promise<Ingredient[]> {
+        return this.repository.find();
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} ingredient`;
-  }
+    async findOne(id: number): Promise<Ingredient> {
+        const result = await this.repository.findOneBy({ id });
+
+        if (!result) {
+            throw new NotFoundException(`Ingredient with id ${id} not found`);
+        }
+
+        return result;
+    }
+
+    async update(
+        id: number,
+        updateIngredientDto: UpdateIngredientDto,
+    ): Promise<UpdateResult> {
+        const result = this.findOne(id);
+
+        return this.repository.update(id, updateIngredientDto);
+    }
+
+    async remove(id: number): Promise<DeleteResult> {
+        return this.repository.delete(id);
+    }
 }

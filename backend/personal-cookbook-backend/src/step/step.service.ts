@@ -1,26 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStepDto } from './dto/create-step.dto';
 import { UpdateStepDto } from './dto/update-step.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Step } from './entities/step.entity';
+import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class StepService {
-  create(createStepDto: CreateStepDto) {
-    return 'This action adds a new step';
-  }
+    constructor(@InjectRepository(Step) private repository: Repository<Step>) {}
 
-  findAll() {
-    return `This action returns all step`;
-  }
+    async create(createStepDto: CreateStepDto): Promise<InsertResult> {
+        const step = this.repository.create(createStepDto);
 
-  findOne(id: number) {
-    return `This action returns a #${id} step`;
-  }
+        return this.repository.insert(step);
+    }
 
-  update(id: number, updateStepDto: UpdateStepDto) {
-    return `This action updates a #${id} step`;
-  }
+    async findAll(): Promise<Step[]> {
+        return this.repository.find();
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} step`;
-  }
+    async findOne(id: number): Promise<Step> {
+        const result = await this.repository.findOneBy({ id });
+
+        if (!result) {
+            throw new NotFoundException(`Step with id ${id} not found`);
+        }
+
+        return result;
+    }
+
+    async update(
+        id: number,
+        updateStepDto: UpdateStepDto,
+    ): Promise<UpdateResult> {
+        const result = this.findOne(id);
+
+        return this.repository.update(id, updateStepDto);
+    }
+
+    async remove(id: number): Promise<DeleteResult> {
+        return this.repository.delete(id);
+    }
 }
