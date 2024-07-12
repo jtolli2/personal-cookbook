@@ -1,5 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Step } from '../../step/entities/step.entity';
+import { Unit } from './unit.enum';
+import { Recipe } from '../../recipe/entities/recipe.entity';
 
 @Entity()
 export class Ingredient {
@@ -7,19 +9,25 @@ export class Ingredient {
     id: number;
 
     @Column()
+    text: string;
+
+    @Column()
     name: string;
 
     @Column()
-    description: string;
-
-    @Column()
-    image: string;
+    note: string;
 
     @Column()
     quantity: number;
 
-    @Column()
+    @Column('simple-enum', { enum: Unit })
     unit: string;
+
+    @Column()
+    prep: string;
+
+    @ManyToOne(() => Recipe, (recipe) => recipe.ingredients)
+    recipe: Recipe;
 
     @ManyToOne(() => Step, (step) => step.ingredients)
     step: Step;

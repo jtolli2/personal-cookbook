@@ -1,3 +1,4 @@
+### NEST BACKEND
 ## Create a new project
 nest new personal-cookbook-backend
 
@@ -50,3 +51,19 @@ mkdir src/auth/entities
 touch src/auth/entities/user.entity.ts
 touch src/auth/entities/role.entity.ts
 touch src/auth/entities/token.entity.ts
+
+### FastAPI Recipe Scraper API
+cd ../
+
+mkdir fastapi-recipe-scraper
+cd fastapi-recipe-scraper
+
+python -m venv env
+source env/Scripts/activate
+# source recipe-env/bin/activate
+
+pip install fastapi uvicorn recipe-scrapers
+pip freeze > requirements.txt
+
+mkdir app
+touch app/main.py

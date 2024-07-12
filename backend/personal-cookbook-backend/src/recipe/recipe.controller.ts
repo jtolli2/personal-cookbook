@@ -44,4 +44,9 @@ export class RecipeController {
     remove(@Param('id') id: string): Promise<DeleteResult> {
         return this.recipeService.remove(+id);
     }
+
+    @Post('import')
+    import(@Body() url: string): Promise<Recipe> {
+        return this.recipeService.import(url);
+    }
 }
