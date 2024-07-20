@@ -18,6 +18,7 @@ class Step(BaseModel):
 
 class Recipe(BaseModel):
     name: str
+    description: str
     image: str
     steps: List[Step]
     ingredients: List[Ingredient]
@@ -55,6 +56,7 @@ async def scrape(recipe_request: RecipeRequest):
 
     result = Recipe(
         name=scraper.title(),
+        description=scraper.description(),
         image=scraper.image(),
         steps=resultSteps,
         ingredients=resultIngredients,

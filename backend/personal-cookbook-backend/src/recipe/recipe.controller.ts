@@ -49,4 +49,14 @@ export class RecipeController {
     import(@Body() url: string): Promise<Recipe> {
         return this.recipeService.import(url);
     }
+
+    @Post('import-save')
+    importSave(@Body() url: string): Promise<Recipe> {
+        return this.recipeService.importSave(url);
+    }
+
+    @Post('export')
+    export(): Promise<Recipe[]> {
+        return this.recipeService.findAll();
+    }
 }

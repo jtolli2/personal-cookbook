@@ -13,25 +13,25 @@ export class Step {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     name?: string;
 
-    @Column()
+    @Column({ nullable: true })
     description?: string;
 
     @Column()
     body: string;
 
-    @Column()
+    @Column({ nullable: true })
     image?: string;
 
     @Column()
     order: number;
 
-    @Column()
+    @Column({ nullable: true })
     optional: boolean;
 
-    @ManyToOne(() => Recipe, (recipe) => recipe.steps)
+    @ManyToOne(() => Recipe, (recipe) => recipe.steps, { onDelete: 'CASCADE' })
     recipe: Recipe;
 
     @OneToMany(() => Ingredient, (ingredient) => ingredient.step, {

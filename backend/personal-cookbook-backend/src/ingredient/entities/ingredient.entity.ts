@@ -11,22 +11,24 @@ export class Ingredient {
     @Column()
     text: string;
 
-    @Column()
+    @Column({ nullable: true })
     name: string;
 
-    @Column()
+    @Column({ nullable: true })
     note: string;
 
-    @Column()
+    @Column({ nullable: true })
     quantity: number;
 
-    @Column('simple-enum', { enum: Unit })
+    @Column('simple-enum', { enum: Unit, nullable: true })
     unit: string;
 
-    @Column()
+    @Column({ nullable: true })
     prep: string;
 
-    @ManyToOne(() => Recipe, (recipe) => recipe.ingredients)
+    @ManyToOne(() => Recipe, (recipe) => recipe.ingredients, {
+        onDelete: 'CASCADE',
+    })
     recipe: Recipe;
 
     @ManyToOne(() => Step, (step) => step.ingredients)

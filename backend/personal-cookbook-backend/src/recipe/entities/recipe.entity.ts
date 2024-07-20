@@ -16,11 +16,18 @@ export class Recipe {
     @Column()
     image: string;
 
-    @OneToMany(() => Step, (step) => step.recipe, { eager: true })
+    @OneToMany(() => Step, (step) => step.recipe, {
+        eager: true,
+        cascade: true,
+    })
     steps: Step[];
 
     @OneToMany(() => Ingredient, (ingredient) => ingredient.recipe, {
         eager: true,
+        cascade: true,
     })
     ingredients: Ingredient[];
+
+    /* @Column()
+    owner: number; */
 }

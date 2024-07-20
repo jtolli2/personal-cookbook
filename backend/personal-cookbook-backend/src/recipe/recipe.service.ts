@@ -56,4 +56,9 @@ export class RecipeService {
 
         return this.repository.create(<Recipe>await result.json());
     }
+
+    async importSave(url: string): Promise<Recipe> {
+        const recipe = await this.import(url);
+        return this.repository.save(recipe);
+    }
 }
