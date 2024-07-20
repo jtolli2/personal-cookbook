@@ -1,0 +1,11 @@
+<script lang="ts">
+import { RouterLink } from '@angular/router' with { analog: 'imports' };
+
+defineMetadata({
+    selector: 'magic-test-page',
+});
+</script>
+
+<template>
+    <a routerLink="/">Home</a>
+</template>
