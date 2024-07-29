@@ -36,7 +36,7 @@ export class RecipeController {
     update(
         @Param('id') id: string,
         @Body() updateRecipeDto: UpdateRecipeDto,
-    ): Promise<UpdateResult> {
+    ): Promise<Recipe> {
         return this.recipeService.update(+id, updateRecipeDto);
     }
 

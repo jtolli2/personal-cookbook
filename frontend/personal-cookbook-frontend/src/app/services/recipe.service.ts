@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { Step } from '../models/step.model';
 import { Ingredient } from '../models/ingredient.model';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
@@ -38,7 +38,15 @@ export class RecipeService {
     }
 
     importRecipe(url: string): Observable<Recipe> {
-        return this.http.post<Recipe>(`${this.recipeUrl}/import`, url);
+        console.log(url);
+        return this.http.post<Recipe>(`${this.recipeUrl}/import`, { url });
+    }
+
+    importSaveRecipe(url: string): Promise<Recipe> {
+        console.log(url);
+        return firstValueFrom<Recipe>(
+            this.http.post<Recipe>(`${this.recipeUrl}/import-save`, { url }),
+        );
     }
 
     // Step methods

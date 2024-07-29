@@ -18,6 +18,7 @@ import { RecipeService } from '../../services/recipe.service';
             <div class="h-[1px] bg-white"></div> -->
 
             <h1>Recipes</h1>
+            <button routerLink="/recipes/import">Add Recipe</button>
 
             <!-- Recipes -->
             <div class="grid grid-cols-3 m-5 shadow-md">
@@ -28,21 +29,21 @@ import { RecipeService } from '../../services/recipe.service';
                 >
                     <a
                         [routerLink]="['/recipes', recipe.id]"
-                        class="[&_img]:hover:scale-125 hover:text-white relative overflow-hidden flex gap-4 after:contents-[''] after:absolute after:inset-0 after:bg-gradient-to-r after:from-pink-500 after:to-violet-500 after:opacity-0 after:scale-[2] after:-translate-x-3/4 after:-translate-y-3/4 after:rotate-[-28deg] after:transition after:duration-700 after:ease-in-out hover:after:opacity-90 hover:after:translate-x-0 hover:after:translate-y-0 hover:after:rotate[-28deg]"
+                        class="*:hover:opacity-100 *:hover:translate-y-0 [&_img]:hover:scale-125 hover:text-white relative overflow-hidden flex gap-4 after:contents-[''] after:absolute after:inset-0 after:bg-gradient-to-r after:from-pink-500 after:to-violet-500 after:opacity-0 after:scale-[2] after:-translate-x-3/4 after:-translate-y-3/4 after:rotate-[-28deg] after:transition after:duration-700 after:ease-in-out hover:after:opacity-90 hover:after:translate-x-0 hover:after:translate-y-0"
                     >
-                        <div>
+                        <div class="w-full h-64">
                             <img
-                                class="transition-transform duration-500 ease-in-out"
+                                class="w-full h-full transition-transform duration-500 ease-in-out"
                                 [src]="recipe.image"
                                 alt=""
                             />
                         </div>
                         <div
-                            class="absolute inset-0 opacity-0 flex justify-center items-center z-[1] translate-y-[-20%] transition-all duration-500 ease-in-out delay-200 hover:opacity-100 hover:translate-y-0"
+                            class="absolute inset-0 opacity-0 flex justify-center items-center z-[1] translate-y-[-20%] transition-all duration-500 ease-in-out delay-200 hover:opacity-100"
                         >
                             <div>
                                 <!-- <p class="item-text-category">Design</p> -->
-                                <h2 class="text-center">
+                                <h2 class="text-center text-3xl">
                                     {{ recipe.name }}
                                 </h2>
                             </div>

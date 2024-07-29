@@ -34,10 +34,10 @@ export class RecipeService {
     async update(
         id: number,
         updateRecipeDto: UpdateRecipeDto,
-    ): Promise<UpdateResult> {
+    ): Promise<Recipe> {
         const result = this.findOne(id);
 
-        return this.repository.update(id, updateRecipeDto);
+        return this.repository.save({ ...result, ...updateRecipeDto });
     }
 
     async remove(id: number): Promise<DeleteResult> {
