@@ -22,7 +22,19 @@ export class RecipeService {
     }
 
     async findOne(id: number): Promise<Recipe> {
-        const result = await this.repository.findOneBy({ id });
+        const result = await this.repository.findOne({
+            where: { id },
+            order: {
+                steps: {
+                    order: 'ASC',
+                },
+                ingredients: {
+                    id: 'ASC',
+                },
+            },
+            // relationLoadStrategy: 'query',
+            // relations: ['steps', 'ingredients'],
+        });
 
         if (!result) {
             throw new NotFoundException(`Recipe with id ${id} not found`);
