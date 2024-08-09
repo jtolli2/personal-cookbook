@@ -6,15 +6,21 @@ import analog from '@analogjs/platform';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
     build: {
-        target: ['es2020'],
+        target: ['es2022'],
     },
     resolve: {
         mainFields: ['module'],
     },
     plugins: [
         analog({
-            vite: { experimental: { supportAnalogFormat: true } },
-            // prerender: { discover: true },
+            vite: {
+                // Somehow breaks imports for ngModules like CommonModule
+                // experimental: { supportAnalogFormat: true },
+            },
+            prerender: {
+                routes: [],
+                // discover: true
+            },
         }),
     ],
     test: {

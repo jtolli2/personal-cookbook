@@ -1,5 +1,5 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { Component, HostListener, OnDestroy, signal } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -38,23 +38,19 @@ import { CommonModule } from '@angular/common';
                 >
                     <span class="sr-only">Open main menu</span>
                     <i
-                        [ngClass]="{
-                            'fa-bars transition-transform duration-200 rotate-180':
-                                !showMenu(),
-                            'fa-times transition-transform duration-300 rotate-90':
-                                showMenu(),
-                        }"
-                        class="fas size-4"
+                        class="fas size-4 {{
+                            showMenu()
+                                ? 'fa-times transition-transform duration-300 rotate-90'
+                                : 'fa-bars transition-transform duration-200 rotate-180'
+                        }}"
                     ></i>
                 </button>
 
                 <!-- Menu -->
                 <div
-                    [ngClass]="{
-                        '-translate-x-full': !showMenu(),
-                        'translate-x-0': showMenu(),
-                    }"
-                    class="fixed left-0 top-0 h-full w-64 bg-inherit shadow-md transition-transform transform ease-in-out duration-300"
+                    class="fixed left-0 top-0 h-full w-64 bg-inherit shadow-md transition-transform transform ease-in-out duration-300 {{
+                        showMenu() ? 'translate-x-0' : '-translate-x-full'
+                    }}"
                 >
                     <!-- Links -->
                     <div class="flex flex-col">
@@ -108,7 +104,6 @@ export class NavbarComponent {
         } else {
             this.scrolled.set(false);
         }
-        console.log(this.scrolled());
     }
 
     isActive(route: string) {

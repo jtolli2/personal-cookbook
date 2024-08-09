@@ -12,7 +12,7 @@ import { take } from 'rxjs';
         <h1>Import</h1>
 
         <div>
-            <label for="url">URL</label>
+            <label for="url">URL: </label>
             <input type="text" id="url" name="url" [(ngModel)]="url" />
             <button type="button" (click)="importRecipe(url)">Import</button>
         </div>
@@ -26,10 +26,7 @@ export default class ImportRecipePage {
     ) {}
 
     async importRecipe(url: string) {
-        console.log(url);
-
         const recipe = await this.recipeService.importSaveRecipe(url);
-        // console.log(recipe);
 
         this.router.navigate(['/recipes', recipe.id]);
     }

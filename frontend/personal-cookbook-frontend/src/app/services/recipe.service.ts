@@ -33,12 +33,13 @@ export class RecipeService {
         );
     }
 
-    deleteRecipe(id: number): Observable<any> {
-        return this.http.delete<Recipe>(`${this.recipeUrl}/${id}`);
+    deleteRecipe(id: number): Promise<any> {
+        return firstValueFrom<Recipe>(
+            this.http.delete<Recipe>(`${this.recipeUrl}/${id}`),
+        );
     }
 
     importRecipe(url: string): Observable<Recipe> {
-        console.log(url);
         return this.http.post<Recipe>(`${this.recipeUrl}/import`, { url });
     }
 

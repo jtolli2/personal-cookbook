@@ -21,17 +21,17 @@ import { RecipeService } from '../../services/recipe.service';
             <button routerLink="/recipes/import">Add Recipe</button>
 
             <!-- Recipes -->
-            <div class="grid grid-cols-3 m-5 shadow-md">
+            <div class="grid grid-cols-3 m-5">
                 <!-- Recipe -->
                 <div
                     *ngFor="let recipe of recipes()"
-                    class="bg-white bg-opacity-15 dark:bg-opacity-15"
+                    class="w-full h-full bg-white bg-opacity-5 dark:bg-opacity-5 shadow-md p-2 rounded-md flex flex-col hover:bg-opacity-15 dark:hover:bg-opacity-15"
                 >
                     <a
                         [routerLink]="['/recipes', recipe.id]"
-                        class="*:hover:opacity-100 *:hover:translate-y-0 [&_img]:hover:scale-125 hover:text-white relative overflow-hidden flex gap-4 after:contents-[''] after:absolute after:inset-0 after:bg-gradient-to-r after:from-pink-500 after:to-violet-500 after:opacity-0 after:scale-[2] after:-translate-x-3/4 after:-translate-y-3/4 after:rotate-[-28deg] after:transition after:duration-700 after:ease-in-out hover:after:opacity-90 hover:after:translate-x-0 hover:after:translate-y-0"
+                        class="w-full h-full *:hover:opacity-100 *:hover:translate-y-0 [&_img]:hover:scale-125 hover:text-white relative overflow-hidden after:contents-[''] after:absolute after:inset-0 after:bg-gradient-to-r after:from-pink-500 after:to-violet-500 after:opacity-0 after:scale-[2] after:-translate-x-3/4 after:-translate-y-3/4 after:rotate-[-28deg] after:transition after:duration-700 after:ease-in-out hover:after:opacity-90 hover:after:translate-x-0 hover:after:translate-y-0"
                     >
-                        <div class="w-full h-64">
+                        <div class="w-full h-full">
                             <img
                                 class="w-full h-full transition-transform duration-500 ease-in-out"
                                 [src]="recipe.image"

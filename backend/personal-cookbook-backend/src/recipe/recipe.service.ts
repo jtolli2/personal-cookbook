@@ -57,14 +57,17 @@ export class RecipeService {
     }
 
     async import(url: string): Promise<Recipe> {
-        const result = await fetch('http://localhost:8000/recipes', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+        const result = await fetch(
+            `http://${process.env.SCRAPER_API_HOST}:8000/recipes`,
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(url),
             },
-            body: JSON.stringify(url),
-        });
+        );
 
         return this.repository.create(<Recipe>await result.json());
     }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Recipe } from '../../models/recipe.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -53,7 +53,12 @@ import { FormsModule } from '@angular/forms';
                         </li>
                     </ol>
 
-                    <button (click)="toggleEditMode()">Edit</button>
+                    <div class="flex gap-5">
+                        <button (click)="toggleEditMode()">Edit</button>
+                        <button (click)="deleteRecipe()" class="text-red-500">
+                            Delete
+                        </button>
+                    </div>
                 </ng-container>
 
                 <ng-template #loading>
@@ -88,7 +93,10 @@ import { FormsModule } from '@angular/forms';
 
                 <h2>Ingredients</h2>
                 <ul class="w-11/12 list-disc">
-                    <li *ngFor="let ingredient of recipe().ingredients">
+                    <li
+                        *ngFor="let ingredient of recipe().ingredients"
+                        draggable="true"
+                    >
                         <input
                             [(ngModel)]="ingredient.text"
                             name="ingredient{{ ingredient.id }}"
@@ -112,8 +120,10 @@ import { FormsModule } from '@angular/forms';
                     </li>
                 </ol>
 
-                <button (click)="cancelEdit()">Cancel</button>
-                <button type="submit" (click)="saveRecipe()">Save</button>
+                <div class="flex gap-5 mt-5">
+                    <button (click)="cancelEdit()">Cancel</button>
+                    <button type="submit" (click)="saveRecipe()">Save</button>
+                </div>
             </form>
         </ng-template>
     `,
@@ -126,7 +136,10 @@ export default class RecipeDetailPage implements OnInit {
     recipe = signal(<Recipe>{});
     inEditMode = signal(false);
 
-    constructor(private recipeService: RecipeService) {}
+    constructor(
+        private recipeService: RecipeService,
+        private router: Router,
+    ) {}
 
     ngOnInit(): void {
         this.recipeService.getRecipe(+this.recipeId).subscribe((recipe) => {
@@ -147,10 +160,22 @@ export default class RecipeDetailPage implements OnInit {
 
     cancelEdit() {
         this.inEditMode.set(false);
-        console.log('cancel edit');
 
         this.recipeService.getRecipe(+this.recipeId).subscribe((recipe) => {
             this.recipe.set(recipe);
+        });
+    }
+
+    async deleteRecipe() {
+        // Show confirmation dialog
+        if (!confirm('Are you sure you want to delete this recipe?')) {
+            return;
+        }
+
+        await this.recipeService.deleteRecipe(+this.recipeId);
+
+        this.router.navigate(['/recipes'], {
+            replaceUrl: true,
         });
     }
 }
