@@ -13,6 +13,8 @@ services:
             context: ./backend/fastapi-recipe-scraper
         # ports:
         #     - 8000:8000
+        expose:
+            - 8000
 
     api:
         build:
@@ -23,6 +25,8 @@ services:
         depends_on:
             - db
             - scraper-api
+        expose:
+            - 3000
 
     frontend:
         build:
@@ -31,6 +35,8 @@ services:
         # ports:
         #     # host:container
         #     - 80:80
+        expose:
+            - 80
         develop:
             watch:
                 - action: rebuild
