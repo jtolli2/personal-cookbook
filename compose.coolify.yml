@@ -30,7 +30,7 @@ services:
         env_file: ./frontend/personal-cookbook-frontend/.env
         ports:
             # host:container
-            - 80:80
+            - 8080:80
         develop:
             watch:
                 - action: rebuild
