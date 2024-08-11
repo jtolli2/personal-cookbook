@@ -7,9 +7,9 @@ import { firstValueFrom, Observable } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
-    private readonly recipeUrl = `${process.env['API_URL']}/recipes`;
-    private readonly stepUrl = `${process.env['API_URL']}/steps`;
-    private readonly ingredientUrl = `${process.env['API_URL']}/ingredients`;
+    private readonly recipeUrl = `${import.meta.env.VITE_API_URL}/recipes`;
+    private readonly stepUrl = `${import.meta.env.VITE_API_URL}/steps`;
+    private readonly ingredientUrl = `${import.meta.env.VITE_API_URL}/ingredients`;
 
     constructor(private readonly http: HttpClient) {}
 
