@@ -36,10 +36,11 @@ services:
             context: ./frontend/personal-cookbook-frontend
         # env_file: ./frontend/personal-cookbook-frontend/.env
         environment:
-            - VITE_API_HOST=api
-            - VITE_API_PORT=3000
-            - VITE_API_SCHEME=http
-            - VITE_API_URL=${VITE_API_SCHEME}://${VITE_API_HOST}:${VITE_API_PORT}
+            # - VITE_API_HOST=api
+            # - VITE_API_PORT=3000
+            # - VITE_API_SCHEME=http
+            # - VITE_API_URL=${VITE_API_SCHEME}://${VITE_API_HOST}:${VITE_API_PORT}
+            - VITE_API_URL=http://api:3000
             - PORT=80
             - HOST=frontend
         ports:
