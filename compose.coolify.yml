@@ -1,0 +1,41 @@
+services:
+    db:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=test123
+            - POSTGRES_DB=personal-cookbook
+        volumes:
+            - personal-cookbook-data:/var/lib/postgresql/data
+
+    scraper-api:
+        build:
+            context: ./backend/fastapi-recipe-scraper
+        ports:
+            - 8000:8000
+
+    api:
+        build:
+            context: ./backend/personal-cookbook-backend
+        env_file: ./backend/personal-cookbook-backend/.env
+        depends_on:
+            - db
+            - scraper-api
+
+    frontend:
+        build:
+            context: ./frontend/personal-cookbook-frontend
+        env_file: ./frontend/personal-cookbook-frontend/.env
+        ports:
+            # host:container
+            - 80:80
+            - 3000:3000
+        develop:
+            watch:
+                - action: rebuild
+                  path: frontend/personal-cookbook-frontend/src/app
+                  target: /usr/src/app
+
+volumes:
+    personal-cookbook-data:
+        driver: local
