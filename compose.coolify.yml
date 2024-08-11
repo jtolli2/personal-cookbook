@@ -11,15 +11,15 @@ services:
     scraper-api:
         build:
             context: ./backend/fastapi-recipe-scraper
-        ports:
-            - 3001:8000
+        # ports:
+        #     - 8000:8000
 
     api:
         build:
             context: ./backend/personal-cookbook-backend
         env_file: ./backend/personal-cookbook-backend/.env
-        ports:
-            - 3000:3000
+        # ports:
+        #     - 3000:3000
         depends_on:
             - db
             - scraper-api
@@ -28,9 +28,9 @@ services:
         build:
             context: ./frontend/personal-cookbook-frontend
         env_file: ./frontend/personal-cookbook-frontend/.env
-        ports:
-            # host:container
-            - 8080:80
+        # ports:
+        #     # host:container
+        #     - 80:80
         develop:
             watch:
                 - action: rebuild
