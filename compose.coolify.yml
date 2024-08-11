@@ -40,7 +40,8 @@ services:
             # - VITE_API_PORT=3000
             # - VITE_API_SCHEME=http
             # - VITE_API_URL=${VITE_API_SCHEME}://${VITE_API_HOST}:${VITE_API_PORT}
-            - VITE_API_URL=http://api:3000
+            # - VITE_API_URL=http://api:3000
+            - VITE_API_URL=http://rs4ok4cccgogo40g00wwk80w.188.245.87.124.sslip.io
             - PORT=80
             - HOST=frontend
         ports:
