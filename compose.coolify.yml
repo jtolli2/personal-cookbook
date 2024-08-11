@@ -38,6 +38,7 @@ services:
         environment:
             # - API_URL=http://rs4ok4cccgogo40g00wwk80w.188.245.87.124.sslip.io
             - API_URL=http://test
+            - TEST=http://test
             - PORT=80
             - HOST=frontend
         ports:
