@@ -34,7 +34,9 @@ services:
     frontend:
         build:
             context: ./frontend/personal-cookbook-frontend
-        # env_file: ./frontend/personal-cookbook-frontend/.env
+            # env_file: ./frontend/personal-cookbook-frontend/.env
+            args:
+                - VITE_API_URL=http://rs4ok4cccgogo40g00wwk80w.188.245.87.124.sslip.io
         environment:
             # - API_URL=http://rs4ok4cccgogo40g00wwk80w.188.245.87.124.sslip.io
             - PORT=80
