@@ -36,7 +36,7 @@ services:
             context: ./frontend/personal-cookbook-frontend
             # env_file: ./frontend/personal-cookbook-frontend/.env
             args:
-                - VITE_API_URL=http://rs4ok4cccgogo40g00wwk80w.188.245.87.124.sslip.io
+                - VITE_API_URL=https://m00wkg0848c8sk4wgcsk4kg4.app.starsummit.net
         environment:
             - PORT=80
             - HOST=frontend
