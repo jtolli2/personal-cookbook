@@ -8,12 +8,13 @@ COPY package*.json ./
 RUN npm i -g @angular/cli
 RUN npm i --force --quiet
 
-# ARG MODE=production
-# ARG VITE_API_URL
-# ENV VITE_API_URL=${VITE_API_URL}
-
 COPY --chown=app:appgroup . .
-RUN npm run build --mode ${MODE}
+
+# Must set build time environment variables here
+ARG VITE_API_URL=http://localhost:3000
+ENV VITE_API_URL $VITE_API_URL
+
+RUN npm run build
 
 USER app
 EXPOSE 80
