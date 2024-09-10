@@ -18,14 +18,14 @@ services:
         networks:
             - personal-cookbook-network
 
-    api:
-        build:
-            context: ./backend/personal-cookbook-backend
-        env_file: ./backend/personal-cookbook-backend/.env
-        network_mode: service:frontend
-        depends_on:
-            - db
-            - scraper-api
+    # api:
+    #     build:
+    #         context: ./backend/personal-cookbook-backend
+    #     env_file: ./backend/personal-cookbook-backend/.env
+    #     network_mode: service:frontend
+    #     depends_on:
+    #         - db
+    #         - scraper-api
 
     frontend:
         build:
@@ -34,7 +34,7 @@ services:
         ports:
             # host:container
             - 80:80
-            - 3000:3000
+            # - 3000:3000
         networks:
             - personal-cookbook-network
         # links:

@@ -1,0 +1,31 @@
+#server.port=3000
+#spring.application.name=cookbook-backend
+#spring.datasource.url=jdbc:postgresql://localhost/personal-cookbook
+#spring.datasource.username=postgres
+#spring.datasource.password=test123
+#spring.datasource.driverClassName=org.postgresql.Driver
+#spring.jpa.hibernate.ddl-auto=validate
+
+server:
+  port: 3000
+
+spring:
+  application:
+    name: cookbook-backend
+  datasource:
+    url: jdbc:postgresql://localhost/personal-cookbook
+    username: postgres
+    password: test123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  #  devtools:
+  #    restart:
+  #      enabled: true
+  jackson:
+    default-property-inclusion: NON_NULL
+
+scraper-api:
+  host: localhost
+  port: 8000
